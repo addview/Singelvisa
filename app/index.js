@@ -3,6 +3,11 @@ import React, { useRef, useEffect } from "react";
 import Swiper from "react-native-swiper";
 import Breakfast from "../components/Breakfast";
 import LinearGradient from "react-native-linear-gradient";
+import Snack from "../components/Snack";
+import Lunch from "../components/Lunch";
+import AfternoonSnack from "../components/AfternoonSnack";
+import Dinner from "../components/Dinner";
+import EveningSnack from "../components/EveningSnack";
 
 const index = () => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -31,32 +36,19 @@ const index = () => {
   return (
     <View style={styles.container}>
       <Swiper
-        loop={true}
+        style={styles.wrapper}
+        showsButtons={false}
+        loop={false}
         showsPagination={false}
-        index={0}
-        onIndexChanged={(index) => {
-          Animated.timing(backgroundColorAnim, {
-            toValue: index,
-            duration: 1000,
-            useNativeDriver: false,
-          }).start();
-          fadeOut();
-
-          setTimeout(() => {
-            fadeIn();
-          }, 1000);
-        }}
+        horizontal={false}
+        scrollEnabled={true}
       >
-        <Animated.View style={[styles.page, { opacity: fadeAnim }]}>
-          <Text style={styles.text}>Sida 1</Text>
-        </Animated.View>
-        <Animated.View style={[styles.page, { opacity: fadeAnim }]}>
-          <Text style={styles.text}>Sida 2</Text>
-        </Animated.View>
-        <Animated.View style={[styles.page, { opacity: fadeAnim }]}>
-          <Text style={styles.text}>Sida 3</Text>
-        </Animated.View>
-        {/* ...repeat for other pages */}
+        <Breakfast />
+        <Snack />
+        <Lunch />
+        <AfternoonSnack />
+        <Dinner />
+        <EveningSnack />
       </Swiper>
     </View>
   );
@@ -68,13 +60,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  page: {
+  wrapper: {},
+  slide1: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#9dd6eb",
+    backgroundColor: "#9DD6EB",
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#97CAE5",
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#92BBD9",
   },
   text: {
+    color: "#fff",
     fontSize: 30,
     fontWeight: "bold",
   },
