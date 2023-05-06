@@ -7,7 +7,7 @@ const Lunch = () => {
     <View className="flex justify-center items-center">
       <ImageBackground
         imageStyle={{ opacity: 0.5 }}
-        source={require("../assets/pexels-matthias-groeneveld-5933631.jpg")} // Replace with the path to your image
+        source={require("../assets/starkt-solljus.jpg")} // Replace with the path to your image
         resizeMode="cover"
         className="h-full w-full justify-center items-center"
       >
