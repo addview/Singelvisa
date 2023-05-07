@@ -4,9 +4,9 @@ import { StatusBar } from "expo-status-bar";
 
 const AfternoonSnack = () => {
   return (
-    <View className="flex justify-center items-center">
+    <View className="flex justify-center items-center bg-[#ff8c00]">
       <ImageBackground
-        imageStyle={{ opacity: 0.5 }}
+        imageStyle={{ opacity: 0.4 }}
         source={require("../assets/eftermiddag.jpg")} // Replace with the path to your image
         resizeMode="cover"
         className="h-full w-full justify-center items-center"
