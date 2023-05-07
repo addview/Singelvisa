@@ -8,8 +8,10 @@ import {
 } from "react-native";
 import BigRoundPressButton from "./BigRoundPressButton";
 
-const AnimatedButton = () => {
+const AnimatedButton = ({ animationTrigger }) => {
   const translateYValue = useRef(new Animated.Value(-100)).current;
+
+  console.log("animationTrigger", animationTrigger);
 
   useEffect(() => {
     Animated.timing(translateYValue, {
@@ -17,7 +19,7 @@ const AnimatedButton = () => {
       duration: 1000,
       useNativeDriver: true,
     }).start();
-  }, []);
+  }, [animationTrigger]);
 
   return (
     <Animated.View

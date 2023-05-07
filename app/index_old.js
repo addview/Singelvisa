@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView, Dimensions, Text } from "react-native";
+import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import React, { useEffect, useState, useRef } from "react";
 import Breakfast from "../components/Breakfast";
 import Snack from "../components/Snack";
@@ -13,13 +13,13 @@ const index = () => {
   const [currentIndex, setCurrentIndex] = useState(null);
   const scrollViewRef = useRef(null);
 
-  const [animationTrigger, setAnimationTrigger] = useState(0);
+  useEffect(() => {
+    // Your function to calculate the initial index based on your conditions
+    const calculatedInitialIndex = calculateInitialIndex();
 
-  const handleScroll = (event) => {
-    const offsetX = event.nativeEvent.contentOffset.x;
-    const pageIndex = Math.round(offsetX / Dimensions.get("window").width);
-    setAnimationTrigger(pageIndex);
-  };
+    // Update the initialIndex state variable
+    setInitialIndex(calculatedInitialIndex);
+  }, []);
 
   useEffect(() => {
     if (scrollViewRef.current && initialIndex !== null) {
@@ -31,13 +31,13 @@ const index = () => {
     }
   }, [initialIndex]);
 
-  useEffect(() => {
-    // Your function to calculate the initial index based on your conditions
-    const calculatedInitialIndex = calculateInitialIndex();
+  const handleMomentumScrollEnd = (event) => {
+    const screenWidth = Dimensions.get("window").width;
+    const currentOffset = event.nativeEvent.contentOffset.x;
+    const newIndex = Math.round(currentOffset / screenWidth);
 
-    // Update the initialIndex state variable
-    setInitialIndex(calculatedInitialIndex);
-  }, []);
+    setCurrentIndex(newIndex);
+  };
 
   const calculateInitialIndex = () => {
     const currentHour = new Date().getHours();
@@ -63,39 +63,30 @@ const index = () => {
         ref={scrollViewRef}
         horizontal
         pagingEnabled
-        onMomentumScrollEnd={handleScroll}
         showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={handleMomentumScrollEnd}
       >
         {/* Your slides */}
-        <View
-          className="flex justify-center items-center bg-[#f0e68c]"
-          style={{ width: Dimensions.get("window").width }}
-        >
-          <Text style={styles.text}>0-10</Text>
-        </View>
-        <View
-          className="flex justify-center items-center bg-[#f0e68c]"
-          style={{ width: Dimensions.get("window").width }}
-        >
-          <Text>10-12</Text>
+        <View style={{ width: Dimensions.get("window").width }}>
+          <Breakfast />
         </View>
         <View style={{ width: Dimensions.get("window").width }}>
-          <Text>12-14</Text>
+          <Snack />
         </View>
         <View style={{ width: Dimensions.get("window").width }}>
-          <Text>14-17</Text>
+          <Lunch />
         </View>
         <View style={{ width: Dimensions.get("window").width }}>
-          <Text>17-20</Text>
+          <AfternoonSnack />
         </View>
         <View style={{ width: Dimensions.get("window").width }}>
-          <Text>20-</Text>
+          <Dinner />
+        </View>
+        <View style={{ width: Dimensions.get("window").width }}>
+          <EveningSnack />
         </View>
       </ScrollView>
-      <AnimatedButton
-        animationTrigger={animationTrigger}
-        key={animationTrigger}
-      />
+      <AnimatedButton triggerAnimation={currentIndex} />
     </View>
   );
 };
