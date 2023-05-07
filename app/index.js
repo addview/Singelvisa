@@ -6,6 +6,7 @@ import Lunch from "../components/Lunch";
 import AfternoonSnack from "../components/AfternoonSnack";
 import Dinner from "../components/Dinner";
 import EveningSnack from "../components/EveningSnack";
+import AnimatedButton from "../components/AnimatedButton";
 
 const index = () => {
   const [initialIndex, setInitialIndex] = useState(null);
@@ -85,6 +86,7 @@ const index = () => {
           <EveningSnack />
         </View>
       </ScrollView>
+      <AnimatedButton triggerAnimation={currentIndex} />
     </View>
   );
 };

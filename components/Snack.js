@@ -10,9 +10,7 @@ const Snack = () => {
         source={require("../assets/campingljus2.jpg")} // Replace with the path to your image
         resizeMode="cover"
         className="h-full w-full justify-center items-center"
-      >
-        <Text className="font-bold text-2xl">Snack</Text>
-      </ImageBackground>
+      ></ImageBackground>
       <StatusBar styles="auto"></StatusBar>
     </View>
   );
